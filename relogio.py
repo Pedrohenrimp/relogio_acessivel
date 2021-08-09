@@ -1,11 +1,7 @@
-import pygame, sys, os, datetime, time
+import pygame, sys, os, datetime
 from pygame.constants import K_KP_ENTER, K_SPACE
 import speech_recognition as sr
-from playsound import playsound
 from gtts import gTTS
-from io import BytesIO
-import tkinter as tk
-from threading import Thread
 
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
@@ -36,7 +32,8 @@ class Acessibilidade:
         try:
             fala = microfone.recognize_google(audio,language='pt-BR')
         except:
-            playsound('erro.mp3')
+            pygame.mixer.music.load("erro.mp3")
+            pygame.mixer.music.play()
 
     def audio_menu():
         pygame.mixer.music.load("menu.mp3")
