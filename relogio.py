@@ -1,4 +1,4 @@
-import pygame, sys, os, datetime
+import pygame, sys, os, datetime, time
 from pygame.constants import K_KP_ENTER, K_SPACE
 import speech_recognition as sr
 from gtts import gTTS
@@ -75,7 +75,6 @@ fonte_hora = pygame.font.SysFont('Arial', 192, bold = True)
 fonte_texto = pygame.font.SysFont('Arial', 48, bold = False)
 
 Acessibilidade.audio_guide()
-
 while True:
     tela.fill(BLACK)
     for evento in pygame.event.get():
@@ -88,10 +87,12 @@ while True:
         if evento.type == pygame.KEYDOWN and evento.key == K_KP_ENTER:
             Acessibilidade.audio_menu()
             Acessibilidade.ouvir_microfone()    
-            if fala == "hora":
-                Acessibilidade.audio_hora_atual()
-                fala = ""
-    
+            
+            print(fala)
+    if "hora" in fala or "ora" in fala:
+        Acessibilidade.audio_hora_atual()
+        fala = ""
+
     Relogio.mostrarHoraAtual()
     pygame.display.update()
     tempo.tick(1)
